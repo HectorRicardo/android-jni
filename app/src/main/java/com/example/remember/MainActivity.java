@@ -1,5 +1,6 @@
 package com.example.remember;
 
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,6 +11,10 @@ public class MainActivity extends AppCompatActivity {
   // Used to load the 'remember' library on application startup.
   static {
     System.loadLibrary("remember");
+  }
+
+  private void onThreadStart() {
+    Log.i("MYAPP", "Wow this works");
   }
 
   private ActivityMainBinding binding;
