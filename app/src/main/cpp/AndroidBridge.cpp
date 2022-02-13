@@ -8,11 +8,11 @@
 AndroidBridge::AndroidBridge(JNIEnv *jniEnv, jobject threadHandler)
     : jniEnv(jniEnv),
       threadHandler(threadHandler),
-      methodToBeCalledFromJNI(
+      onThreadStartedMethodID(
           jniEnv->GetMethodID(jniEnv->GetObjectClass(threadHandler),
                               "onThreadStart",
                               "()V")) {}
 
-void AndroidBridge::callThreadStartedMethod() const {
-  jniEnv->CallVoidMethod(threadHandler, methodToBeCalledFromJNI);
+void AndroidBridge::onThreadStarted() const {
+  jniEnv->CallVoidMethod(threadHandler, onThreadStartedMethodID);
 }

@@ -11,11 +11,11 @@
 class AndroidBridge : public PlatformBridge {
  public:
   AndroidBridge(JNIEnv *jniEnv, jobject threadHandler);
-  void callThreadStartedMethod() const override;
+  void onThreadStarted() const override;
  private:
   JNIEnv *jniEnv;
   jobject threadHandler;
-  jmethodID methodToBeCalledFromJNI;
+  jmethodID onThreadStartedMethodID;
 };
 
 #endif // MYAPP_ANDROID_BRIDGE_H
