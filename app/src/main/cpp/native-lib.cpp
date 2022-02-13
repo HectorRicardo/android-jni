@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <thread>
-#include "AndroidBridge.hpp"
+#include "AndroidThreadExecutionCallbacks.hpp"
 #include "common/thread_logic.hpp"
 
 extern "C" JNIEXPORT void JNICALL
@@ -17,7 +17,7 @@ Java_com_example_remember_MainActivity_startThread(
     JNIEnv *env;
     javaVM->AttachCurrentThread(&env, nullptr);
 
-    AndroidBridge bridge(env, threadHandlerGlobal);
+    AndroidThreadExecutionCallbacks bridge(env, threadHandlerGlobal);
     threadBody(bridge);
 
     env->DeleteGlobalRef(threadHandlerGlobal);

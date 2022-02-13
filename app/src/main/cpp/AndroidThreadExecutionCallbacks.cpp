@@ -3,9 +3,10 @@
 //
 
 #include <jni.h>
-#include "AndroidBridge.hpp"
+#include "AndroidThreadExecutionCallbacks.hpp"
 
-AndroidBridge::AndroidBridge(JNIEnv *jniEnv, jobject threadHandler)
+AndroidThreadExecutionCallbacks::AndroidThreadExecutionCallbacks(JNIEnv *jniEnv,
+                                                                 jobject threadHandler)
     : jniEnv(jniEnv),
       threadHandler(threadHandler),
       onThreadStartedMethodID(
@@ -13,6 +14,6 @@ AndroidBridge::AndroidBridge(JNIEnv *jniEnv, jobject threadHandler)
                               "onThreadStart",
                               "()V")) {}
 
-void AndroidBridge::onThreadStarted() const {
+void AndroidThreadExecutionCallbacks::onThreadStarted() const {
   jniEnv->CallVoidMethod(threadHandler, onThreadStartedMethodID);
 }
