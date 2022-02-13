@@ -36,8 +36,8 @@ void threadBody(JNIEnv *env, jobject mainActivityGlobal) {
   }
 }
 
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_remember_MainActivity_stringFromJNI(
+extern "C" JNIEXPORT void JNICALL
+Java_com_example_remember_MainActivity_jniMethod(
     JNIEnv *env,
     jobject mainActivity) {
   callMethod(env, mainActivity);
@@ -57,6 +57,4 @@ Java_com_example_remember_MainActivity_stringFromJNI(
     javaVM->DetachCurrentThread();
   });
   thr.detach();
-
-  return env->NewStringUTF("Hello from C++");
 }

@@ -3,7 +3,6 @@ package com.example.remember;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 import com.example.remember.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,27 +12,23 @@ public class MainActivity extends AppCompatActivity {
     System.loadLibrary("remember");
   }
 
+  @SuppressWarnings("unused")
   private void onThreadStart() {
-    Log.i("MYAPP", "Wow this works");
+    Log.i("MYAPP", "Starting thread");
   }
-
-  private ActivityMainBinding binding;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    binding = ActivityMainBinding.inflate(getLayoutInflater());
-    setContentView(binding.getRoot());
+    setContentView(ActivityMainBinding.inflate(getLayoutInflater()).getRoot());
 
-    // Example of a call to a native method
-    TextView tv = binding.sampleText;
-    tv.setText(stringFromJNI());
+    jniMethod();
   }
 
   /**
    * A native method that is implemented by the 'remember' native library, which is packaged with
    * this application.
    */
-  public native String stringFromJNI();
+  public native void jniMethod();
 }
