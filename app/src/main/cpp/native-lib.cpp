@@ -3,9 +3,9 @@
 #include <chrono>
 #include "print.hpp"
 
-class ThreadObject {
+class PlatformBridge {
  public:
-  ThreadObject(JNIEnv *jniEnv, jobject mainActivity)
+  PlatformBridge(JNIEnv *jniEnv, jobject mainActivity)
       : jniEnv(jniEnv),
         mainActivity(mainActivity),
         methodToBeCalledFromJNI(
@@ -21,11 +21,10 @@ class ThreadObject {
   jmethodID methodToBeCalledFromJNI;
 };
 
-void threadBody(JNIEnv *env, jobject mainActivity) {
-  ThreadObject t(env, mainActivity);
+void threadBody(PlatformBridge& bridge) {
   for (int i = 0; i < 5; i++) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    t.callThreadStartedMethod();
+    bridge.callThreadStartedMethod();
   }
 }
 
@@ -42,7 +41,8 @@ Java_com_example_remember_MainActivity_startThread(
     JNIEnv *env;
     javaVM->AttachCurrentThread(&env, nullptr);
 
-    threadBody(env, mainActivityGlobal);
+    PlatformBridge bridge(env, mainActivityGlobal);
+    threadBody(bridge);
 
     env->DeleteGlobalRef(mainActivityGlobal);
     javaVM->DetachCurrentThread();
