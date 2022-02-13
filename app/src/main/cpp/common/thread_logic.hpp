@@ -7,6 +7,6 @@
 
 #include "ThreadExecutionCallbacks.hpp"
 
-void threadBody(ThreadExecutionCallbacks& bridge);
+void threadBody(ThreadExecutionCallbacks&);
 
 #endif // MYAPP_THREAD_LOGIC_HPP

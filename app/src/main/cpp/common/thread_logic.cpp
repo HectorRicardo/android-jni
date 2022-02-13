@@ -7,9 +7,9 @@
 #include <thread>
 #include <chrono>
 
-void threadBody(ThreadExecutionCallbacks& bridge) {
+void threadBody(ThreadExecutionCallbacks& threadExecutionCallbacks) {
   for (int i = 0; i < 5; i++) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    bridge.onThreadStarted();
+    threadExecutionCallbacks.onThreadStarted();
   }
 }
