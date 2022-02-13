@@ -6,9 +6,9 @@
 #define MYAPP_ANDROID_BRIDGE_H
 
 #include <jni.h>
-#include "common/PlatformBridge.hpp"
+#include "common/ThreadExecutionCallbacks.hpp"
 
-class AndroidBridge : public PlatformBridge {
+class AndroidBridge : public ThreadExecutionCallbacks {
  public:
   AndroidBridge(JNIEnv *jniEnv, jobject threadHandler);
   void onThreadStarted() const override;

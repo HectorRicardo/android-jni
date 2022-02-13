@@ -5,8 +5,8 @@
 #ifndef MYAPP_THREAD_LOGIC_HPP
 #define MYAPP_THREAD_LOGIC_HPP
 
-#include "PlatformBridge.hpp"
+#include "ThreadExecutionCallbacks.hpp"
 
-void threadBody(PlatformBridge& bridge);
+void threadBody(ThreadExecutionCallbacks& bridge);
 
 #endif // MYAPP_THREAD_LOGIC_HPP
