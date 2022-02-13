@@ -8,30 +8,31 @@ class ThreadObject {
   ThreadObject(JNIEnv *jniEnv, jobject mainActivity)
       : jniEnv(jniEnv),
         mainActivity(mainActivity),
-        onThreadStartMethodId(
+        methodToBeCalledFromJNI(
             jniEnv->GetMethodID(jniEnv->GetObjectClass(mainActivity),
-                                "onThreadStart",
+                                "methodToBeCalledFromJNI",
                                 "()V")) {}
   void callThreadStartedMethod() const {
-    jniEnv->CallVoidMethod(mainActivity, onThreadStartMethodId);
+    jniEnv->CallVoidMethod(mainActivity, methodToBeCalledFromJNI);
   }
  private:
   JNIEnv *jniEnv;
   jobject mainActivity;
-  jmethodID onThreadStartMethodId;
+  jmethodID methodToBeCalledFromJNI;
 };
 
-void callMethod(JNIEnv *env, jobject mainActivity) {
+void callJavaMethod(JNIEnv *env, jobject mainActivity) {
   jclass mainActivityClass = env->GetObjectClass(mainActivity);
   jmethodID
-      j_method = env->GetMethodID(mainActivityClass, "onThreadStart", "()V");
+      j_method =
+      env->GetMethodID(mainActivityClass, "methodToBeCalledFromJNI", "()V");
   env->CallVoidMethod(mainActivity, j_method);
 }
 
 void threadBody(JNIEnv *env, jobject mainActivityGlobal) {
   ThreadObject t(env, mainActivityGlobal);
-  for (int i = 0; i < 6; i++) {
-    std::this_thread::sleep_for (std::chrono::milliseconds(1000));
+  for (int i = 0; i < 5; i++) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     t.callThreadStartedMethod();
   }
 }
@@ -40,7 +41,7 @@ extern "C" JNIEXPORT void JNICALL
 Java_com_example_remember_MainActivity_jniMethod(
     JNIEnv *env,
     jobject mainActivity) {
-  callMethod(env, mainActivity);
+  callJavaMethod(env, mainActivity);
 
   JavaVM *javaVM;
   env->GetJavaVM(&javaVM);

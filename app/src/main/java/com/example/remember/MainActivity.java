@@ -1,8 +1,8 @@
 package com.example.remember;
 
+import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.example.remember.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,14 +13,13 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @SuppressWarnings("unused")
-  private void onThreadStart() {
-    Log.i("MYAPP", "Starting thread");
+  private void methodToBeCalledFromJNI() {
+    Log.i("MYAPP", "We did it!");
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     setContentView(ActivityMainBinding.inflate(getLayoutInflater()).getRoot());
 
     jniMethod();
