@@ -1,3 +1,7 @@
+//
+// Created by hecto on 1/4/2022.
+//
+
 #include "thread_logic.hpp"
 #include "PlatformBridge.hpp"
 #include <thread>

@@ -1,3 +1,7 @@
+//
+// Created by hecto on 1/4/2022.
+//
+
 #include <jni.h>
 #include "AndroidBridge.hpp"
 
