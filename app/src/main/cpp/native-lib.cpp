@@ -21,8 +21,8 @@ class ThreadObject {
   jmethodID methodToBeCalledFromJNI;
 };
 
-void threadBody(JNIEnv *env, jobject mainActivityGlobal) {
-  ThreadObject t(env, mainActivityGlobal);
+void threadBody(JNIEnv *env, jobject mainActivity) {
+  ThreadObject t(env, mainActivity);
   for (int i = 0; i < 5; i++) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     t.callThreadStartedMethod();
