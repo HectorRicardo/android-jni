@@ -22,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(ActivityMainBinding.inflate(getLayoutInflater()).getRoot());
 
-    jniMethod();
+    startThread();
   }
 
   /**
    * A native method that is implemented by the 'remember' native library, which is packaged with
    * this application.
    */
-  public native void jniMethod();
+  public native void startThread();
 }

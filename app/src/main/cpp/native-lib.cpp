@@ -21,14 +21,6 @@ class ThreadObject {
   jmethodID methodToBeCalledFromJNI;
 };
 
-void callJavaMethod(JNIEnv *env, jobject mainActivity) {
-  jclass mainActivityClass = env->GetObjectClass(mainActivity);
-  jmethodID
-      j_method =
-      env->GetMethodID(mainActivityClass, "methodToBeCalledFromJNI", "()V");
-  env->CallVoidMethod(mainActivity, j_method);
-}
-
 void threadBody(JNIEnv *env, jobject mainActivityGlobal) {
   ThreadObject t(env, mainActivityGlobal);
   for (int i = 0; i < 5; i++) {
@@ -38,11 +30,9 @@ void threadBody(JNIEnv *env, jobject mainActivityGlobal) {
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_example_remember_MainActivity_jniMethod(
+Java_com_example_remember_MainActivity_startThread(
     JNIEnv *env,
     jobject mainActivity) {
-  callJavaMethod(env, mainActivity);
-
   JavaVM *javaVM;
   env->GetJavaVM(&javaVM);
 
