@@ -12,22 +12,17 @@ public class MainActivity extends AppCompatActivity {
     System.loadLibrary("remember");
   }
 
-  @SuppressWarnings("unused")
-  private void methodToBeCalledFromJNI() {
-    Log.i("MYAPP", "We did it!");
-  }
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(ActivityMainBinding.inflate(getLayoutInflater()).getRoot());
 
-    startThread();
+    startThread(new ThreadExecutionHandler());
   }
 
   /**
    * A native method that is implemented by the 'remember' native library, which is packaged with
    * this application.
    */
-  public native void startThread();
+  public static native void startThread(ThreadExecutionHandler threadExecutionHandler);
 }

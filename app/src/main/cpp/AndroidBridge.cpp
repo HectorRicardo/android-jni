@@ -5,14 +5,14 @@
 #include <jni.h>
 #include "AndroidBridge.hpp"
 
-AndroidBridge::AndroidBridge(JNIEnv *jniEnv, jobject mainActivity)
+AndroidBridge::AndroidBridge(JNIEnv *jniEnv, jobject threadHandler)
     : jniEnv(jniEnv),
-      mainActivity(mainActivity),
+      threadHandler(threadHandler),
       methodToBeCalledFromJNI(
-          jniEnv->GetMethodID(jniEnv->GetObjectClass(mainActivity),
-                              "methodToBeCalledFromJNI",
+          jniEnv->GetMethodID(jniEnv->GetObjectClass(threadHandler),
+                              "onThreadStart",
                               "()V")) {}
 
 void AndroidBridge::callThreadStartedMethod() const {
-  jniEnv->CallVoidMethod(mainActivity, methodToBeCalledFromJNI);
+  jniEnv->CallVoidMethod(threadHandler, methodToBeCalledFromJNI);
 }

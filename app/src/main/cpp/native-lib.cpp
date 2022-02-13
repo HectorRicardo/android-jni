@@ -6,20 +6,21 @@
 extern "C" JNIEXPORT void JNICALL
 Java_com_example_remember_MainActivity_startThread(
     JNIEnv *env,
-    jobject mainActivity) {
+    jclass,
+    jobject threadHandler) {
   JavaVM *javaVM;
   env->GetJavaVM(&javaVM);
 
-  jobject mainActivityGlobal = env->NewGlobalRef(mainActivity);
+  jobject threadHandlerGlobal = env->NewGlobalRef(threadHandler);
 
-  std::thread thr([javaVM, mainActivityGlobal] {
+  std::thread thr([javaVM, threadHandlerGlobal] {
     JNIEnv *env;
     javaVM->AttachCurrentThread(&env, nullptr);
 
-    AndroidBridge bridge(env, mainActivityGlobal);
+    AndroidBridge bridge(env, threadHandlerGlobal);
     threadBody(bridge);
 
-    env->DeleteGlobalRef(mainActivityGlobal);
+    env->DeleteGlobalRef(threadHandlerGlobal);
     javaVM->DetachCurrentThread();
   });
   thr.detach();
