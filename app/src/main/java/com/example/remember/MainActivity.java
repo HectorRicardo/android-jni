@@ -1,7 +1,6 @@
 package com.example.remember;
 
 import android.os.Bundle;
-import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.remember.databinding.ActivityMainBinding;
 
@@ -17,12 +16,12 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(ActivityMainBinding.inflate(getLayoutInflater()).getRoot());
 
-    startThread(new ThreadExecutionHandler());
+    startThread(new ThreadExecutionCallbacks());
   }
 
   /**
    * A native method that is implemented by the 'remember' native library, which is packaged with
    * this application.
    */
-  public static native void startThread(ThreadExecutionHandler threadExecutionHandler);
+  public static native void startThread(ThreadExecutionCallbacks threadExecutionHandler);
 }

@@ -3,7 +3,7 @@ package com.example.remember;
 import android.util.Log;
 
 @SuppressWarnings("unused")
-public class ThreadExecutionHandler {
+public class ThreadExecutionCallbacks {
 
   public void onThreadStart() {
     Log.d("MYAPP", "OnThreadStart");
