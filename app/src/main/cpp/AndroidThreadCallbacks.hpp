@@ -6,9 +6,9 @@
 #define MYAPP_ANDROID_THREAD_CALLBACKS_HPP
 
 #include <jni.h>
-#include "common/ThreadExecutionCallbacks.hpp"
+#include "common/ThreadCallbacks.hpp"
 
-class AndroidThreadCallbacks : public ThreadExecutionCallbacks {
+class AndroidThreadCallbacks : public ThreadCallbacks {
  public:
   AndroidThreadCallbacks(JNIEnv *jniEnv, jobject threadCallbacks);
   void onThreadStarted() const override;
