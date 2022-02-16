@@ -2,8 +2,9 @@
 // Created by hecto on 1/4/2022.
 //
 
-#include <jni.h>
 #include "android_thread_callbacks.hpp"
+
+#include <jni.h>
 
 AndroidThreadCallbacks::AndroidThreadCallbacks(JNIEnv *jniEnv,
                                                    jobject threadCallbacks)

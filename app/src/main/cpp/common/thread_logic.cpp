@@ -2,9 +2,10 @@
 // Created by hecto on 1/4/2022.
 //
 
+#include "thread_logic.hpp"
+
 #include <thread>
 #include <chrono>
-#include "thread_logic.hpp"
 #include "thread_callbacks.hpp"
 
 void thread_logic(const ThreadCallbacks& callbacks) {
