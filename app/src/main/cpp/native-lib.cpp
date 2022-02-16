@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <thread>
-#include "android_thread_callbacks.hpp"
 #include "common/thread_logic.hpp"
+#include "android_thread_callbacks.hpp"
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_example_remember_MainActivity_startThread(

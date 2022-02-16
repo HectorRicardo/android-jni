@@ -6,31 +6,31 @@
 
 #include <jni.h>
 
-AndroidThreadCallbacks::AndroidThreadCallbacks(JNIEnv *jniEnv,
-                                                   jobject threadCallbacks)
+AndroidThreadCallbacks::AndroidThreadCallbacks(JNIEnv *jniEnv, jobject callbacks)
     : jniEnv(jniEnv),
-      threadCallbacks(threadCallbacks),
+      callbacks(callbacks),
       onThreadStartedMethodID(
-          jniEnv->GetMethodID(jniEnv->GetObjectClass(threadCallbacks),
+          jniEnv->GetMethodID(jniEnv->GetObjectClass(callbacks),
                               "onThreadStart",
                               "()V")),
       onIterationCompleteMethodID(
-          jniEnv->GetMethodID(jniEnv->GetObjectClass(threadCallbacks),
+          jniEnv->GetMethodID(jniEnv->GetObjectClass(callbacks),
                               "onIterationComplete",
                               "(I)V")),
       onThreadFinishedMethodID(
-          jniEnv->GetMethodID(jniEnv->GetObjectClass(threadCallbacks),
+          jniEnv->GetMethodID(jniEnv->GetObjectClass(callbacks),
                               "onThreadFinished",
-                              "()V")){}
+                              "()V"))
+{}
 
 void AndroidThreadCallbacks::onThreadStarted() const {
-  jniEnv->CallVoidMethod(threadCallbacks, onThreadStartedMethodID);
+  jniEnv->CallVoidMethod(callbacks, onThreadStartedMethodID);
 }
 
 void AndroidThreadCallbacks::onIterationComplete(int iteration) const {
-  jniEnv->CallVoidMethod(threadCallbacks, onIterationCompleteMethodID, iteration);
+  jniEnv->CallVoidMethod(callbacks, onIterationCompleteMethodID, iteration);
 }
 
 void AndroidThreadCallbacks::onThreadFinished() const {
-  jniEnv->CallVoidMethod(threadCallbacks, onThreadFinishedMethodID);
+  jniEnv->CallVoidMethod(callbacks, onThreadFinishedMethodID);
 }

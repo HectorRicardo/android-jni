@@ -16,7 +16,7 @@ class AndroidThreadCallbacks : public ThreadCallbacks {
   void onThreadFinished() const override;
  private:
   JNIEnv *jniEnv;
-  jobject threadCallbacks;
+  jobject callbacks;
   jmethodID onThreadStartedMethodID;
   jmethodID onIterationCompleteMethodID;
   jmethodID onThreadFinishedMethodID;
