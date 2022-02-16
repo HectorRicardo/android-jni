@@ -7,11 +7,11 @@
 #include "thread_logic.hpp"
 #include "thread_callbacks.hpp"
 
-void thread_logic(const Thread_Callbacks& thread_callbacks) {
-  thread_callbacks.onThreadStarted();
+void thread_logic(const ThreadCallbacks& callbacks) {
+  callbacks.onThreadStarted();
   for (int i = 0; i < 5; i++) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    thread_callbacks.onIterationComplete(i);
+    callbacks.onIterationComplete(i);
   }
-  thread_callbacks.onThreadFinished();
+  callbacks.onThreadFinished();
 }

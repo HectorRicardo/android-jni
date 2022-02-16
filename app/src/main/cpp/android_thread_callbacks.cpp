@@ -5,7 +5,7 @@
 #include <jni.h>
 #include "android_thread_callbacks.hpp"
 
-Android_Thread_Callbacks::Android_Thread_Callbacks(JNIEnv *jniEnv,
+AndroidThreadCallbacks::AndroidThreadCallbacks(JNIEnv *jniEnv,
                                                    jobject threadCallbacks)
     : jniEnv(jniEnv),
       threadCallbacks(threadCallbacks),
@@ -22,14 +22,14 @@ Android_Thread_Callbacks::Android_Thread_Callbacks(JNIEnv *jniEnv,
                               "onThreadFinished",
                               "()V")){}
 
-void Android_Thread_Callbacks::onThreadStarted() const {
+void AndroidThreadCallbacks::onThreadStarted() const {
   jniEnv->CallVoidMethod(threadCallbacks, onThreadStartedMethodID);
 }
 
-void Android_Thread_Callbacks::onIterationComplete(int iteration) const {
+void AndroidThreadCallbacks::onIterationComplete(int iteration) const {
   jniEnv->CallVoidMethod(threadCallbacks, onIterationCompleteMethodID, iteration);
 }
 
-void Android_Thread_Callbacks::onThreadFinished() const {
+void AndroidThreadCallbacks::onThreadFinished() const {
   jniEnv->CallVoidMethod(threadCallbacks, onThreadFinishedMethodID);
 }

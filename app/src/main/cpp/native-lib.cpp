@@ -17,7 +17,7 @@ Java_com_example_remember_MainActivity_startThread(
     JNIEnv *env;
     javaVM->AttachCurrentThread(&env, nullptr);
 
-    Android_Thread_Callbacks callbacks(env, threadCallbacksGlobal);
+    AndroidThreadCallbacks callbacks(env, threadCallbacksGlobal);
     thread_logic(callbacks);
 
     env->DeleteGlobalRef(threadCallbacksGlobal);

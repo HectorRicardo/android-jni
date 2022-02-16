@@ -7,6 +7,6 @@
 
 #include "thread_callbacks.hpp"
 
-void thread_logic(const Thread_Callbacks&);
+void thread_logic(const ThreadCallbacks&);
 
 #endif // MYAPP_THREAD_LOGIC_HPP
