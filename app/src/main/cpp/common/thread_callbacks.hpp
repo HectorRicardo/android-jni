@@ -5,7 +5,7 @@
 #ifndef MYAPP_THREAD_CALLBACKS_HPP
 #define MYAPP_THREAD_CALLBACKS_HPP
 
-class ThreadCallbacks {
+class Thread_Callbacks {
  public:
   virtual void onThreadStarted() const = 0;
 };

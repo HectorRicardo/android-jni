@@ -5,8 +5,8 @@
 #ifndef MYAPP_THREAD_LOGIC_HPP
 #define MYAPP_THREAD_LOGIC_HPP
 
-#include "ThreadCallbacks.hpp"
+#include "thread_callbacks.hpp"
 
-void threadBody(const ThreadCallbacks&);
+void thread_logic(const Thread_Callbacks&);
 
 #endif // MYAPP_THREAD_LOGIC_HPP

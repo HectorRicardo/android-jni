@@ -5,11 +5,11 @@
 #include <thread>
 #include <chrono>
 #include "thread_logic.hpp"
-#include "ThreadCallbacks.hpp"
+#include "thread_callbacks.hpp"
 
-void threadBody(const ThreadCallbacks& threadCallbacks) {
+void thread_logic(const Thread_Callbacks& thread_callbacks) {
   for (int i = 0; i < 5; i++) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    threadCallbacks.onThreadStarted();
+    thread_callbacks.onThreadStarted();
   }
 }

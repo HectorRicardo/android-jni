@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <thread>
-#include "AndroidThreadCallbacks.hpp"
+#include "android_thread_callbacks.hpp"
 #include "common/thread_logic.hpp"
 
 extern "C" JNIEXPORT void JNICALL
@@ -13,15 +13,14 @@ Java_com_example_remember_MainActivity_startThread(
 
   jobject threadCallbacksGlobal = env->NewGlobalRef(threadCallbacks);
 
-  std::thread thr([javaVM, threadCallbacksGlobal] {
+  std::thread([javaVM, threadCallbacksGlobal] {
     JNIEnv *env;
     javaVM->AttachCurrentThread(&env, nullptr);
 
-    AndroidThreadCallbacks bridge(env, threadCallbacksGlobal);
-    threadBody(bridge);
+    Android_Thread_Callbacks callbacks(env, threadCallbacksGlobal);
+    thread_logic(callbacks);
 
     env->DeleteGlobalRef(threadCallbacksGlobal);
     javaVM->DetachCurrentThread();
-  });
-  thr.detach();
+  }).detach();
 }
