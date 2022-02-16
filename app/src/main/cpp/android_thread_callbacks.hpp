@@ -8,18 +8,21 @@
 #include <jni.h>
 #include "common/thread_callbacks.hpp"
 
-class AndroidThreadCallbacks : public ThreadCallbacks {
+class AndroidThreadCallbacks: public ThreadCallbacks {
  public:
   AndroidThreadCallbacks(JNIEnv *jniEnv, jobject callbacks);
   void onThreadStarted() const override;
   void onIterationComplete(int iteration) const override;
   void onThreadFinished() const override;
  private:
-  JNIEnv *jniEnv;
-  jobject callbacks;
-  jmethodID onThreadStartedMethodID;
-  jmethodID onIterationCompleteMethodID;
-  jmethodID onThreadFinishedMethodID;
+  AndroidThreadCallbacks(JNIEnv *jniEnv,
+                         jobject callbacks,
+                         jclass callbacksClass);
+  JNIEnv *const jniEnv;
+  const jobject callbacks;
+  const jmethodID onThreadStartedMethodID;
+  const jmethodID onIterationCompleteMethodID;
+  const jmethodID onThreadFinishedMethodID;
 };
 
 #endif // MYAPP_ANDROID_THREAD_CALLBACKS_HPP
