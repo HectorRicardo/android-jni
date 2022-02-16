@@ -7,21 +7,20 @@ extern "C" JNIEXPORT void JNICALL
 Java_com_example_remember_MainActivity_startThread(
     JNIEnv *env,
     jclass,
-    jobject threadExecutionCallbacks) {
+    jobject threadCallbacks) {
   JavaVM *javaVM;
   env->GetJavaVM(&javaVM);
 
-  jobject threadExecutionCallbacksGlobal =
-      env->NewGlobalRef(threadExecutionCallbacks);
+  jobject threadCallbacksGlobal = env->NewGlobalRef(threadCallbacks);
 
-  std::thread thr([javaVM, threadExecutionCallbacksGlobal] {
+  std::thread thr([javaVM, threadCallbacksGlobal] {
     JNIEnv *env;
     javaVM->AttachCurrentThread(&env, nullptr);
 
-    AndroidThreadExecutionCallbacks bridge(env, threadExecutionCallbacksGlobal);
+    AndroidThreadExecutionCallbacks bridge(env, threadCallbacksGlobal);
     threadBody(bridge);
 
-    env->DeleteGlobalRef(threadExecutionCallbacksGlobal);
+    env->DeleteGlobalRef(threadCallbacksGlobal);
     javaVM->DetachCurrentThread();
   });
   thr.detach();

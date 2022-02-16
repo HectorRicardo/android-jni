@@ -10,11 +10,11 @@
 
 class AndroidThreadExecutionCallbacks : public ThreadExecutionCallbacks {
  public:
-  AndroidThreadExecutionCallbacks(JNIEnv *jniEnv, jobject threadHandler);
+  AndroidThreadExecutionCallbacks(JNIEnv *jniEnv, jobject threadCallbacks);
   void onThreadStarted() const override;
  private:
   JNIEnv *jniEnv;
-  jobject threadHandler;
+  jobject threadCallbacks;
   jmethodID onThreadStartedMethodID;
 };
 

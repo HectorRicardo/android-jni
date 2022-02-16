@@ -6,14 +6,14 @@
 #include "AndroidThreadExecutionCallbacks.hpp"
 
 AndroidThreadExecutionCallbacks::AndroidThreadExecutionCallbacks(JNIEnv *jniEnv,
-                                                                 jobject threadHandler)
+                                                                 jobject threadCallbacks)
     : jniEnv(jniEnv),
-      threadHandler(threadHandler),
+      threadCallbacks(threadCallbacks),
       onThreadStartedMethodID(
-          jniEnv->GetMethodID(jniEnv->GetObjectClass(threadHandler),
+          jniEnv->GetMethodID(jniEnv->GetObjectClass(threadCallbacks),
                               "onThreadStart",
                               "()V")) {}
 
 void AndroidThreadExecutionCallbacks::onThreadStarted() const {
-  jniEnv->CallVoidMethod(threadHandler, onThreadStartedMethodID);
+  jniEnv->CallVoidMethod(threadCallbacks, onThreadStartedMethodID);
 }
