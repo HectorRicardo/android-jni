@@ -10,10 +10,10 @@ public class ThreadCallbacks {
   }
 
   public void onIterationComplete(int iteration) {
-    Log.d("MYAPP", "onIterationComplete " + iteration);
+    Log.d("MYAPP", "OnThreadIteration " + iteration);
   }
 
-  public void onThreadEnd() {
-    Log.d("MYAPP", "onThreadEnd");
+  public void onThreadFinished() {
+    Log.d("MYAPP", "OnThreadFinished");
   }
 }

@@ -8,6 +8,8 @@
 class Thread_Callbacks {
  public:
   virtual void onThreadStarted() const = 0;
+  virtual void onIterationComplete(int iteration) const = 0;
+  virtual void onThreadFinished() const = 0;
 };
 
 #endif // MYAPP_THREAD_CALLBACKS_HPP
