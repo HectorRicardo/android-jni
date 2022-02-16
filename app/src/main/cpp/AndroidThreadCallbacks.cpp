@@ -3,10 +3,10 @@
 //
 
 #include <jni.h>
-#include "AndroidThreadExecutionCallbacks.hpp"
+#include "AndroidThreadCallbacks.hpp"
 
-AndroidThreadExecutionCallbacks::AndroidThreadExecutionCallbacks(JNIEnv *jniEnv,
-                                                                 jobject threadCallbacks)
+AndroidThreadCallbacks::AndroidThreadCallbacks(JNIEnv *jniEnv,
+                                               jobject threadCallbacks)
     : jniEnv(jniEnv),
       threadCallbacks(threadCallbacks),
       onThreadStartedMethodID(
@@ -14,6 +14,6 @@ AndroidThreadExecutionCallbacks::AndroidThreadExecutionCallbacks(JNIEnv *jniEnv,
                               "onThreadStart",
                               "()V")) {}
 
-void AndroidThreadExecutionCallbacks::onThreadStarted() const {
+void AndroidThreadCallbacks::onThreadStarted() const {
   jniEnv->CallVoidMethod(threadCallbacks, onThreadStartedMethodID);
 }
